@@ -1,4 +1,9 @@
-// Update with your config settings.
+const localPg = {
+  host: "localhost",
+  database: "courses",
+};
+
+const productionDbConnection = process.env.DATABASE_URL || localPg;
 
 module.exports = {
 
@@ -20,5 +25,14 @@ module.exports = {
       }
     }
   },
-
-};
+  production: {
+    client: "pg",
+    connection: productionDbConnection,
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
+    }
+  }
+}
